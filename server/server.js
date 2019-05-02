@@ -17,8 +17,7 @@ app.use(cookieParser());
 app.use(cors());
 
 
-// Adding a new commit
-// Adding a new api
+// Revert Changes
 
 // Models
 const { Admin } = require("./models/admin");
