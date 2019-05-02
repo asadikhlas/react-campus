@@ -17,7 +17,8 @@ app.use(cookieParser());
 app.use(cors());
 
 
-// Revert Changes
+
+// Adding data to master 
 
 // Models
 const { Admin } = require("./models/admin");
