@@ -1,9 +1,10 @@
 import React from 'react'
+import Routers from './Components/Routers';
 
 const App = () => {
   return (
     <div>
-      hello
+      <Routers />
     </div>
   )
 }
