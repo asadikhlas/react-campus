@@ -3,9 +3,9 @@ const axios = require("axios");
 const baseUrl = "http://localhost:3002";
 
 // GET REQUEST FOR STUDENT DATA [WORKS]
-// axios.get("http://localhost:3002/api/student").then(res => {
-//   console.log(res.data);
-// });
+axios.get("http://localhost:3002/api/student").then(res => {
+  console.log(res.data);
+});
 
 // ====================================================
 

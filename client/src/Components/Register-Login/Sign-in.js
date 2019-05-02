@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 
 import { connect } from "react-redux";
 import { sigin_in } from "../../Store/Actions/login-actions";
+import { asyncLogin } from "../../Store/Middlewares/login_middleware";
 
 class SignIn extends Component {
   state = {
@@ -122,7 +123,7 @@ const mapStateToProps = ({ SignIn }) => {
 const mapDispatchToProps = dispatch => {
   return {
     login_handle: data => {
-      dispatch(sigin_in(data));
+      dispatch(asyncLogin(data));
     }
   };
 };
