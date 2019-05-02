@@ -9,9 +9,8 @@ import {
 } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 
-
-import {connect} from 'react-redux'
-import {sigin_in} from '../../Store/Actions/login-actions';
+import { connect } from "react-redux";
+import { sigin_in } from "../../Store/Actions/login-actions";
 
 class SignIn extends Component {
   state = {
@@ -41,11 +40,8 @@ class SignIn extends Component {
       role
     };
 
-
-    this.props.sigin_in(newObj);
-    this.props.history.push('/studentdashboard')
-
-
+    this.props.login_handle(newObj);
+    this.props.history.push("/studentdashboard");
   };
 
   render() {
@@ -117,12 +113,21 @@ class SignIn extends Component {
   }
 }
 
+const mapStateToProps = ({ SignIn }) => {
+  return {
+    currentUser: SignIn.currentUser
+  };
+};
 
-const mapStateToProps = ({SignIn}) => {
-    return {
-        currentUser: SignIn.currentUser
+const mapDispatchToProps = dispatch => {
+  return {
+    login_handle: data => {
+      dispatch(sigin_in(data));
     }
-}
+  };
+};
 
-
-export default connect (mapStateToProps, {sigin_in})(SignIn)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SignIn);
