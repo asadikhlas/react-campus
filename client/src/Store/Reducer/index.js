@@ -1,7 +1,7 @@
 import {combineReducers} from 'redux';
-import {dummy_reducer} from './dummy_reducer';
+import {SignIn} from './SignIn';
 
 
 export const rootReducer = combineReducers({
-    dummy_reducer
+    SignIn
 })
