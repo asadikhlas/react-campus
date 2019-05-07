@@ -4,10 +4,6 @@ import { loginError, loginSuccess } from "../Actions/studentLogin-actions";
 export const asyncLogin = newData => async dispatch => {
   try {
     const { data } = await axios.get("http://localhost:3002/api/student");
-
-    // console.log(newData);
-    // console.log("data", data.userData);
-
     if (!data.userData.length > 0) {
       dispatch(loginError("Cannot login, Please try again"));
     } else {
