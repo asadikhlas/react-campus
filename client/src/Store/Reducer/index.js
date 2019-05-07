@@ -4,5 +4,6 @@ import {loginReducer} from './login_reducer'
 
 
 export const rootReducer = combineReducers({
-    loginReducer
+    loginReducer,
+    companyLoginReducer
 })
