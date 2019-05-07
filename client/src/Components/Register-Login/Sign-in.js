@@ -38,7 +38,7 @@ class SignIn extends Component {
       password,
       role
     };
-    this.props.companyAsyncLogin(newObj)
+    this.props.companyAsyncLogin(newObj);
     this.props.asyncLogin(newObj);
   };
 
@@ -46,6 +46,8 @@ class SignIn extends Component {
     const oldProps = this.props;
     if (oldProps.currentUser !== newProps.currentUser) {
       this.props.history.push("/studentDashboard");
+    } else if (oldProps.companyUser !== newProps.companyUser) {
+      this.props.history.push("/companydashboard");
     }
   }
 
@@ -115,17 +117,17 @@ class SignIn extends Component {
             Not Registered? <Link to="/register">Create an account</Link> <br />{" "}
             Or Are you Admin ? <Link to="/adminLogin">Admin Login</Link>
           </Message>
-
         </Grid.Column>
       </Grid>
     );
   }
 }
 
-const mapStateToProps = ({ loginReducer }) => {
+const mapStateToProps = ({ loginReducer, companyLoginReducer }) => {
   return {
     currentUser: loginReducer.currentUser,
-    errorMessage: loginReducer.errorMessage
+    errorMessage: loginReducer.errorMessage,
+    companyUser: companyLoginReducer.companyUser
   };
 };
 
@@ -135,7 +137,7 @@ const mapDispatchToProps = dispatch => {
       dispatch(asyncLogin(data));
     },
     companyAsyncLogin: data => {
-      dispatch(companyAsyncLogin(data))
+      dispatch(companyAsyncLogin(data));
     }
   };
 };
