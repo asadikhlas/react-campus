@@ -1,10 +1,21 @@
 import * as actionTypes from "./Types";
 
-export const sigin_in = currentUser => {
+
+export const loginError = data => {
   return {
-    type: actionTypes.SIGNIN,
+    type: actionTypes.LOGIN_ERROR,
     payload: {
-      currentUser
+      data
     }
-  };
-};
+  }
+}
+
+
+export const loginSuccess  = currentUser => {
+  return {
+    type: actionTypes.LOGIN_SUCCESS,
+    payload: {
+    currentUser
+    }
+  }
+}

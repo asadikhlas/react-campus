@@ -1,14 +1,29 @@
 const initialState = {
-  currentUser: 'null'
+  currentUser: null,
+  isError: false,
+  isSuccess: false, 
+  errorMessage: ''
 };
 
-export const SignIn = (state = initialState, action) => {
+export const loginReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "SIGN-IN":
+      case 'LOGIN_ERROR':
       return {
         ...state,
-        currentUser: action.payload.currentUser
-      };
+         isError : true, 
+         currentUser: null,
+         errorMessage: action.payload.data, 
+         isSuccess: false
+
+      }
+      case 'LOGIN_SUCCESS':
+      return {
+        ...state,
+        isSuccess: true, 
+        isError: false, 
+        currentUser: action.payload.currentUser, 
+        errorMessage: ''
+      }
     default:
       return state;
   }

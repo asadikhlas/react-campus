@@ -10,7 +10,6 @@ import {
 import { Link } from "react-router-dom";
 
 import { connect } from "react-redux";
-import { sigin_in } from "../../Store/Actions/login-actions";
 import { asyncLogin } from "../../Store/Middlewares/login_middleware";
 
 class SignIn extends Component {
@@ -19,7 +18,6 @@ class SignIn extends Component {
     password: "",
     role: "company"
   };
-
   handleChange = event => {
     this.setState({
       [event.target.name]: event.target.value
@@ -41,12 +39,17 @@ class SignIn extends Component {
       role
     };
 
-    this.props.login_handle(newObj);
-    this.props.history.push("/studentdashboard");
+    this.props.asyncLogin(newObj);
   };
 
+  componentWillReceiveProps(newProps) {
+    const oldProps = this.props;
+    if (oldProps.currentUser !== newProps.currentUser) {
+      this.props.history.push("/studentDashboard");
+    }
+  }
+
   render() {
-    console.log(this.props);
     return (
       <Grid textAlign="center" verticalAlign="middle" className="app">
         <Grid.Column style={{ maxWidth: 1000 }}>
@@ -102,8 +105,14 @@ class SignIn extends Component {
               <Button color="violet" fluid size="large">
                 Submit
               </Button>
+              {this.props.sign_in_success && <div>success</div>}
+              {this.props.sign_in_error && <div>error</div>}
             </Segment>
           </Form>
+          {this.props.errorMessage && (
+            <Message color="red"> {this.props.errorMessage}</Message>
+          )}
+
           <Message color="black">
             Not Registered? <Link to="/register">Create an account</Link> <br />{" "}
             Or Are you Admin ? <Link to="/adminLogin">Admin Login</Link>
@@ -114,15 +123,16 @@ class SignIn extends Component {
   }
 }
 
-const mapStateToProps = ({ SignIn }) => {
+const mapStateToProps = ({ loginReducer }) => {
   return {
-    currentUser: SignIn.currentUser
+    currentUser: loginReducer.currentUser,
+    errorMessage: loginReducer.errorMessage
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    login_handle: data => {
+    asyncLogin: data => {
       dispatch(asyncLogin(data));
     }
   };
