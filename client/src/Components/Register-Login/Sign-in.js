@@ -104,8 +104,6 @@ class SignIn extends Component {
               <Button color="violet" fluid size="large">
                 Submit
               </Button>
-              {this.props.sign_in_success && <div>success</div>}
-              {this.props.sign_in_error && <div>error</div>}
             </Segment>
           </Form>
           {this.props.errorMessage && (

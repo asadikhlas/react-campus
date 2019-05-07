@@ -38,7 +38,6 @@ class Routers extends Component {
   }
 
   render() {
-    console.log(this.props.currentUser);
     return (
       <Router>
         <div>
