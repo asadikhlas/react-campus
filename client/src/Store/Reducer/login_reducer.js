@@ -1,29 +1,28 @@
 const initialState = {
   currentUser: null,
   isError: false,
-  isSuccess: false, 
-  errorMessage: ''
+  isSuccess: false,
+  errorMessage: ""
 };
 
 export const loginReducer = (state = initialState, action) => {
   switch (action.type) {
-      case 'LOGIN_ERROR':
+    case "LOGIN_ERROR":
       return {
         ...state,
-         isError : true, 
-         currentUser: null,
-         errorMessage: action.payload.data, 
-         isSuccess: false
-
-      }
-      case 'LOGIN_SUCCESS':
+        isError: true,
+        currentUser: null,
+        errorMessage: action.payload.data,
+        isSuccess: false
+      };
+    case "LOGIN_SUCCESS":
       return {
         ...state,
-        isSuccess: true, 
-        isError: false, 
-        currentUser: action.payload.currentUser, 
-        errorMessage: ''
-      }
+        isSuccess: true,
+        isError: false,
+        currentUser: action.payload.currentUser,
+        errorMessage: ""
+      };
     default:
       return state;
   }
