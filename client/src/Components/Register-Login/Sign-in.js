@@ -8,7 +8,6 @@ import {
   Message
 } from "semantic-ui-react";
 import { Link } from "react-router-dom";
-
 import { connect } from "react-redux";
 import { asyncLogin } from "../../Store/Middlewares/login_middleware";
 
@@ -117,6 +116,7 @@ class SignIn extends Component {
             Not Registered? <Link to="/register">Create an account</Link> <br />{" "}
             Or Are you Admin ? <Link to="/adminLogin">Admin Login</Link>
           </Message>
+
         </Grid.Column>
       </Grid>
     );
