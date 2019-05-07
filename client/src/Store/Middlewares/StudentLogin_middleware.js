@@ -1,5 +1,5 @@
 import axios from "axios";
-import { loginError, loginSuccess } from "../Actions/login-actions";
+import { loginError, loginSuccess } from "../Actions/studentLogin-actions";
 
 export const asyncLogin = newData => async dispatch => {
   try {

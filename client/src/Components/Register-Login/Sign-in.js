@@ -9,7 +9,7 @@ import {
 } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { asyncLogin } from "../../Store/Middlewares/login_middleware";
+import { asyncLogin } from "../../Store/Middlewares/StudentLogin_middleware";
 
 class SignIn extends Component {
   state = {
