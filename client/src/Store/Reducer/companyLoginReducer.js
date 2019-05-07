@@ -10,8 +10,8 @@ export const companyLoginReducer = (state = intialState, action) => {
     case "COMPANY_LOGIN_SUCCESS":
       return {
         ...state,
-        isError: true,
-        isSuccess: false,
+        isError: false,
+        isSuccess: true,
         errorMessage: "",
         companyUser: action.payload.companyUser
       };
