@@ -10,6 +10,7 @@ import {
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { asyncLogin } from "../../Store/Middlewares/StudentLogin_middleware";
+import { companyAsyncLogin } from "../../Store/Middlewares/companyLoginMiddleware";
 
 class SignIn extends Component {
   state = {
@@ -37,7 +38,7 @@ class SignIn extends Component {
       password,
       role
     };
-
+    this.props.companyAsyncLogin(newObj)
     this.props.asyncLogin(newObj);
   };
 
@@ -132,6 +133,9 @@ const mapDispatchToProps = dispatch => {
   return {
     asyncLogin: data => {
       dispatch(asyncLogin(data));
+    },
+    companyAsyncLogin: data => {
+      dispatch(companyAsyncLogin(data))
     }
   };
 };
