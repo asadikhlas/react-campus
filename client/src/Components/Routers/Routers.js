@@ -45,7 +45,7 @@ class Routers extends Component {
           <Route exact path="/register" component={Register} />
           <Route exact path="/admindashboard" component={AdminDashboard} />
           <Route exact path="/adminLogin" component={AdminLogin} />
-          <Route exact path="/createjob" component={PostJob} />
+          <PrivateRoute  isCompanySuccess={this.props.isSuccess && this.state.isSuccess && this.props.companyUser.role === "company"} exact path="/createjob" component={PostJob} />
           <PrivateRoute isSuccess={ this.props.isSuccess && this.state.isSuccess && this.props.currentUser.role === "student"} exact path="/studentdashboard" component={StudentDashboard}/>
           <PrivateRoute isCompanySuccess={this.props.isSuccess && this.state.isSuccess && this.props.companyUser.role === "company" } exact path="/companydashboard" component={CompanyDashboard} />
         </div>
@@ -60,7 +60,7 @@ const mapStateToProps = ({ loginReducer, companyLoginReducer }) => {
     isSuccess: loginReducer.isSuccess,
     currentUser: loginReducer.currentUser,
     companyUser: companyLoginReducer.companyUser,
-    isSuccess: companyLoginReducer.isSuccess
+    isSuccess: companyLoginReducer.isSuccess,
   };
 };
 

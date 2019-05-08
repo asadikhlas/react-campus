@@ -38,8 +38,11 @@ class SignIn extends Component {
       password,
       role
     };
-    this.props.companyAsyncLogin(newObj);
-    this.props.asyncLogin(newObj);
+    if (this.state.role === "company") {
+      this.props.companyAsyncLogin(newObj);
+    } else {
+      this.props.asyncLogin(newObj);
+    }
   };
 
   componentWillReceiveProps(newProps) {
@@ -103,7 +106,6 @@ class SignIn extends Component {
               </select>
               <br />
               <br />
-
               <Button color="violet" fluid size="large">
                 Submit
               </Button>

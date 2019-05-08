@@ -25,6 +25,6 @@ export const companyAsyncLogin = newData => async dispatch => {
       }
     }
   } catch (error) {
-    dispatch(companyLoginError("cannot login, please try agian later"));
+    dispatch(companyLoginError("cannot login, please try again later"));
   }
 };
