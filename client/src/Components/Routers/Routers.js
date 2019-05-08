@@ -9,12 +9,17 @@ import StudentDashboard from "../StudentDashboard/StudentDashboard";
 import PostJob from "../CompanyDashboard/PostJob";
 import { connect } from "react-redux";
 
-const PrivateRoute = ({ component: Component, isSuccess, ...rest }) => {
+const PrivateRoute = ({
+  component: Component,
+  isSuccess,
+  isCompanySuccess,
+  ...rest
+}) => {
   return (
     <Route
       {...rest}
       render={props =>
-        isSuccess === true ? (
+        isSuccess || isCompanySuccess ? (
           <Component {...props} />
         ) : (
           <Redirect to={{ pathname: "/", state: { from: props.location } }} />
@@ -25,18 +30,6 @@ const PrivateRoute = ({ component: Component, isSuccess, ...rest }) => {
 };
 
 class Routers extends Component {
-  state = {
-    isSuccess: false
-  };
-
-  componentDidMount() {
-    if (!this.props.isSuccess) {
-      this.setState({
-        isSuccess: true
-      });
-    }
-  }
-
   render() {
     return (
       <Router>
@@ -45,12 +38,14 @@ class Routers extends Component {
           <Route exact path="/register" component={Register} />
           <Route exact path="/admindashboard" component={AdminDashboard} />
           <Route exact path="/adminLogin" component={AdminLogin} />
-          <PrivateRoute  isCompanySuccess={this.props.isSuccess && this.state.isSuccess && this.props.companyUser.role === "company"} exact path="/createjob" component={PostJob} />
-          <PrivateRoute isSuccess={ this.props.isSuccess && this.state.isSuccess && this.props.currentUser.role === "student"} exact path="/studentdashboard" component={StudentDashboard}/>
-          <PrivateRoute isCompanySuccess={this.props.isSuccess && this.state.isSuccess && this.props.companyUser.role === "company" } exact path="/companydashboard" component={CompanyDashboard} />
+          {/* prettier-ignore*/}
+          <PrivateRoute isCompanySuccess={this.props.isCompanySuccess && this.props.companyUser.role === 'company'} exact path="/postjob" component={PostJob} />
+          {/* prettier-ignore*/}
+          <PrivateRoute isCompanySuccess={this.props.isCompanySuccess && this.props.companyUser.role === 'company'} exact path="/companydashboard" component={CompanyDashboard} />
+          {/* prettier-ignore*/}
+          <PrivateRoute isSuccess={this.props.isSuccess && this.props.currentUser.role === "student"} exact path="/studentdashboard" component={StudentDashboard}/>
         </div>
       </Router>
-      
     );
   }
 }
@@ -60,7 +55,7 @@ const mapStateToProps = ({ loginReducer, companyLoginReducer }) => {
     isSuccess: loginReducer.isSuccess,
     currentUser: loginReducer.currentUser,
     companyUser: companyLoginReducer.companyUser,
-    isSuccess: companyLoginReducer.isSuccess,
+    isCompanySuccess: companyLoginReducer.isSuccess
   };
 };
 

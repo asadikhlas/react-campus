@@ -48,7 +48,7 @@ class SignIn extends Component {
   componentWillReceiveProps(newProps) {
     const oldProps = this.props;
     if (oldProps.currentUser !== newProps.currentUser) {
-      this.props.history.push("/studentDashboard");
+      this.props.history.push("/studentdashboard");
     } else if (oldProps.companyUser !== newProps.companyUser) {
       this.props.history.push("/companydashboard");
     }
