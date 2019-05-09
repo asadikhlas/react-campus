@@ -30,11 +30,19 @@ class AdminLogin extends Component {
     }
 
     this.props.adminAsyncLogin(newObj)
-    this.props.history.push('./admindashboard')
+
+   }
 
 
+  componentWillReceiveProps(newProps) {
+    const oldProps = this.props;
+    if (oldProps.adminUser !== newProps.adminUser) {
+      this.props.history.push("/admindashboard");
+    }else{
+      this.props.history.push("/adminlogin")
+    }
   }
-
+ 
   render() {
     return (
       <Grid textAlign="center" verticalAlign="middle" className="app">

@@ -13,13 +13,14 @@ const PrivateRoute = ({
   component: Component,
   isSuccess,
   isCompanySuccess,
+  isAdminSuccess,
   ...rest
 }) => {
   return (
     <Route
       {...rest}
       render={props =>
-        isSuccess || isCompanySuccess ? (
+        isSuccess || isCompanySuccess || isAdminSuccess ? (
           <Component {...props} />
         ) : (
           <Redirect to={{ pathname: "/", state: { from: props.location } }} />
@@ -36,7 +37,8 @@ class Routers extends Component {
         <div>
           <Route exact path="/" component={SignIn} />
           <Route exact path="/register" component={Register} />
-          <Route exact path="/admindashboard" component={AdminDashboard} />
+          {/* prettier-ignore*/}
+          <PrivateRoute isCompanySuccess={this.props.isAdminSuccess && this.props.adminUser.email === 'admin@admin.com' } exact path="/admindashboard" component={AdminDashboard} />
           <Route exact path="/adminLogin" component={AdminLogin} />
           {/* prettier-ignore*/}
           <PrivateRoute isCompanySuccess={this.props.isCompanySuccess && this.props.companyUser.role === 'company'} exact path="/postjob" component={PostJob} />
@@ -50,12 +52,18 @@ class Routers extends Component {
   }
 }
 
-const mapStateToProps = ({ loginReducer, companyLoginReducer }) => {
+const mapStateToProps = ({
+  loginReducer,
+  companyLoginReducer,
+  adminLoginReducer
+}) => {
   return {
     isSuccess: loginReducer.isSuccess,
     currentUser: loginReducer.currentUser,
     companyUser: companyLoginReducer.companyUser,
-    isCompanySuccess: companyLoginReducer.isSuccess
+    isCompanySuccess: companyLoginReducer.isSuccess,
+    isAdminSuccess: adminLoginReducer.isSuccess,
+    adminUser: adminLoginReducer.adminUser
   };
 };
 
