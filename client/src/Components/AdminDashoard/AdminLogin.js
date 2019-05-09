@@ -7,6 +7,8 @@ import {
   Header,
   Message
 } from "semantic-ui-react";
+import {connect} from 'react-redux';
+import {adminAsyncLogin} from '../../Store/Middlewares/adminLoginMiddleware';
 
 class AdminLogin extends Component {
   state = {
@@ -26,7 +28,10 @@ class AdminLogin extends Component {
       email,
       password
     }
-    
+
+    this.props.adminAsyncLogin(newObj)
+    this.props.history.push('./admindashboard')
+
 
   }
 
@@ -79,5 +84,20 @@ class AdminLogin extends Component {
   }
 }
 
+const mapStateToProps = ({adminLoginReducer}) => {
+  return {
+    adminUser: adminLoginReducer.adminUser,
+    errorMessage: adminLoginReducer.errorMessage
+  }
+}
 
-export default AdminLogin;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    adminAsyncLogin: (data) => {
+      dispatch(adminAsyncLogin(data))
+    }
+  }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(AdminLogin);
