@@ -9,8 +9,9 @@ import {
   Segment,
   Visibility
 } from "semantic-ui-react";
-import PostJob from './PostJob';
-import StudentTable from '../Tables/studentTable';
+import PostJob from "./PostJob";
+import StudentTable from "../Tables/studentTable";
+import { Redirect } from "react-router-dom";
 // Heads up!
 // We using React Static to prerender our docs with server side rendering, this is a quite simple solution.
 // For more advanced usage please check Responsive docs under the "Usage" section.
@@ -49,7 +50,8 @@ HomepageHeading.propTypes = {
  */
 class DesktopContainer extends Component {
   state = {
-    screen: "student"
+    screen: "student",
+    redirect: false
   };
 
   handleScreen = event => {
@@ -64,8 +66,16 @@ class DesktopContainer extends Component {
     }
   };
 
-  handleSignout = () => {
-    window.location.reload(true);
+  setRedirect = () => {
+    this.setState({
+      redirect: true
+    });
+  };
+
+  renderRedirect = () => {
+    if (this.state.redirect) {
+      return <Redirect to="/" />;
+    }
   };
 
   hideFixedMenu = () => this.setState({ fixed: false });
@@ -123,7 +133,7 @@ class DesktopContainer extends Component {
                     inverted={!fixed}
                     primary={fixed}
                     style={{ marginLeft: "0.5em" }}
-                    onClick={this.handleSignout}
+                    onClick={this.setRedirect}
                   >
                     Sign Out
                   </Button>
@@ -134,6 +144,7 @@ class DesktopContainer extends Component {
           </Segment>
           <br />
           {this.state.screen === "student" ? <StudentTable /> : <PostJob />}
+          {this.renderRedirect()}
         </Visibility>
 
         {children}
