@@ -50,7 +50,7 @@ class JobsTable extends Component {
           </Table.Header>
 
           <Table.Body>
-            {this.state.dataSave.map((item,i) => {
+            {this.state.dataSave.map((item, i) => {
               return (
                 <Table.Row key={item._id}>
                   <Table.Cell collapsing />
