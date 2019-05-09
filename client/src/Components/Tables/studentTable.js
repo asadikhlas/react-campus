@@ -31,7 +31,7 @@ class StudentTable extends Component {
           <Table.Header>
             <Table.Row>
               <Table.HeaderCell />
-
+              <Table.HeaderCell>S.no</Table.HeaderCell>
               <Table.HeaderCell>First Name</Table.HeaderCell>
               <Table.HeaderCell>Last Name</Table.HeaderCell>
               <Table.HeaderCell>E-mail address</Table.HeaderCell>
@@ -41,10 +41,11 @@ class StudentTable extends Component {
           </Table.Header>
 
           <Table.Body>
-            {this.state.dataSave.map(item => {
+            {this.state.dataSave.map((item,i) => {
               return (
                 <Table.Row key={item.email}>
                   <Table.Cell collapsing />
+                  <Table.Cell>{i + 1}</Table.Cell>
                   <Table.Cell>{item.name}</Table.Cell>
                   <Table.Cell>{item.lastname}</Table.Cell>
                   <Table.Cell>{item.email}</Table.Cell>
