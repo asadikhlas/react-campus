@@ -284,7 +284,7 @@ class Register extends React.Component {
             </Message>
           )}
           <Message color="black">
-            Have already an account ? <Link to="/login">Login here</Link>
+            Have already an account ? <Link to="/">Login here</Link>
           </Message>
         </Grid.Column>
       </Grid>
