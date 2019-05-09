@@ -44,20 +44,32 @@ class Register extends React.Component {
 
   isFormEmpty = ({
     username,
-    lastname,
+    companyName,
     email,
-    contact,
     password,
+    contact,
+    lastname,
     passwordConfirmation
   }) => {
-    return (
-      !username.length ||
-      !lastname.length ||
-      !email.length ||
-      !contact.length ||
-      !password.length ||
-      !passwordConfirmation.length
-    );
+    if (this.state.role === "company") {
+      return (
+        !username.length ||
+        !email.length ||
+        !password.length ||
+        !companyName ||
+        !passwordConfirmation.length
+      );
+    } else {
+      return (
+        !username.length ||
+        !email.length ||
+        !password.length ||
+        !companyName ||
+        !passwordConfirmation.length ||
+        !lastname.length ||
+        !contact.length
+      );
+    }
   };
 
   isPasswordValid = ({ password, passwordConfirmation }) => {
@@ -83,7 +95,7 @@ class Register extends React.Component {
     });
   };
 
-  getData = () => {
+  getData = async () => {
     const {
       companyName,
       role,
@@ -94,42 +106,58 @@ class Register extends React.Component {
       contact
     } = this.state;
     if (role === "student") {
-      axios
-        .post(`${baseUrl}/api/student/register`, {
+      try {
+        const { data } = await axios.post(`${baseUrl}/api/student/register`, {
           name: username,
           lastname: lastname,
           email: email,
           password: password,
           contact: contact,
           role: "student"
-        })
-        .then(res => {
-          if (res.status === 200) {
-            alert("your details are submitted to us");
-          }
-        })
-        .catch(err => {
-          console.log(err);
         });
+
+        if (data.success) {
+          alert("You can now login");
+        } else {
+          alert("Sorry please try again later");
+        }
+      } catch (err) {
+        console.log(err);
+      }
     } else if (role === "company") {
-      axios
-        .post(`${baseUrl}/api/company/register`, {
-          CompanyCeo: username,
+      try {
+        const { data } = await axios.post(`${baseUrl}/api/company/register`, {
           email: email,
-          password: password,
           CompanyName: companyName,
+          password: password,
+          CompanyCeo: username,
           role: "company"
-        })
-        .then(res => {
-          if (res.status === 200) {
-            alert("your details are submitted to us");
-          } else {
-            alert("something went wrong");
-          }
-        })
-        .catch(err => {
-          console.log(err);
         });
+
+        if (data.success) {
+          alert("You can now login");
+
+          this.setState(
+            {
+              companyName: "",
+              username: "",
+              lastname: "",
+              email: "",
+              contact: "",
+              password: "",
+              passwordConfirmation: "",
+              errors: []
+            },
+            () => {
+              this.props.history.push("/");
+            }
+          );
+        } else {
+          alert("Sorry please try again later");
+        }
+      } catch (err) {
+        console.log(err);
+      }
     }
   };
 

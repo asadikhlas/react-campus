@@ -7,8 +7,6 @@ import {
 export const companyAsyncLogin = newData => async dispatch => {
   try {
     const { data } = await axios.get("http://localhost:3002/api/company");
-    // console.log(data.userData);
-    // console.log("newData", newData);
     if (!data.userData.length > 0) {
       dispatch(companyLoginError("cannot login, please try agian later"));
     } else {

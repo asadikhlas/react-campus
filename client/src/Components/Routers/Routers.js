@@ -6,7 +6,6 @@ import AdminDashboard from "../AdminDashoard/AdminDashboard";
 import AdminLogin from "../AdminDashoard/AdminLogin";
 import CompanyDashboard from "../CompanyDashboard/Companydashboard";
 import StudentDashboard from "../StudentDashboard/StudentDashboard";
-import PostJob from "../CompanyDashboard/PostJob";
 import { connect } from "react-redux";
 
 const PrivateRoute = ({
@@ -37,11 +36,10 @@ class Routers extends Component {
         <div>
           <Route exact path="/" component={SignIn} />
           <Route exact path="/register" component={Register} />
+          <Route exact path="/adminLogin" component={AdminLogin} />
+
           {/* prettier-ignore*/}
           <PrivateRoute isCompanySuccess={this.props.isAdminSuccess && this.props.adminUser.email === 'admin@admin.com' } exact path="/admindashboard" component={AdminDashboard} />
-          <Route exact path="/adminLogin" component={AdminLogin} />
-          {/* prettier-ignore*/}
-          <PrivateRoute isCompanySuccess={this.props.isCompanySuccess && this.props.companyUser.role === 'company'} exact path="/postjob" component={PostJob} />
           {/* prettier-ignore*/}
           <PrivateRoute isCompanySuccess={this.props.isCompanySuccess && this.props.companyUser.role === 'company'} exact path="/companydashboard" component={CompanyDashboard} />
           {/* prettier-ignore*/}
