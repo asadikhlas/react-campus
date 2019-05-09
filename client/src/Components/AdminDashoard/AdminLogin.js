@@ -21,6 +21,11 @@ class AdminLogin extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault()
+    const {email, password} = this.state
+    const newObj = {
+      email,
+      password
+    }
     
 
   }
