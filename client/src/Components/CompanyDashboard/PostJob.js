@@ -31,6 +31,14 @@ class PostJob extends Component {
         if (res.status === 200) {
           alert("your post are successfully submitted to us");
         }
+        this.setState({
+          title: "",
+          companyName: "",
+          salary: "",
+          date: "",
+          description: "",
+          role: "company"
+        });
       })
       .catch(err => {
         console.log(err);
