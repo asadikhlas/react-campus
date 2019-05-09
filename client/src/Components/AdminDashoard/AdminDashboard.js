@@ -10,9 +10,9 @@ import {
   Visibility
 } from "semantic-ui-react";
 import { Redirect } from "react-router-dom";
-import AdminStudentTable from '../Tables/adminStudentTable';
-import AdminCompanyTable from '../Tables/adminCompanyTable';
-import AdminJobsTable from '../Tables/adminJobsTable';
+import AdminStudentTable from "../Tables/adminStudentTable";
+import AdminCompanyTable from "../Tables/adminCompanyTable";
+import AdminJobsTable from "../Tables/adminJobsTable";
 
 // Heads up!
 // We using React Static to prerender our docs with server side rendering, this is a quite simple solution.
