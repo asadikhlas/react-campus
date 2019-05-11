@@ -23,8 +23,14 @@ export const adminLoginReducer = (state = initialState, action) => {
         adminUser: null,
         errorMessage: action.payload.error
       };
-      case "ADMIN_SIGNOUT":
-      return state
+    case "ADMIN_SIGNOUT":
+      return {
+        ...state,
+        isSuccess: false,
+        isError: false,
+        adminUser: null,
+        errorMessage: ""
+      };
     default:
       return state;
   }
