@@ -11,9 +11,8 @@ import {
 } from "semantic-ui-react";
 import PostJob from "./PostJob";
 import StudentTable from "../Tables/studentTable";
-import { connect } from 'react-redux';
-import {companySignout} from '../../Store/Actions/companyLoginAction';
-
+import { connect } from "react-redux";
+import { companySignout } from "../../Store/Actions/companyLoginAction";
 
 const HomepageHeading = () => (
   <Container text>
@@ -28,10 +27,9 @@ const HomepageHeading = () => (
   </Container>
 );
 
-
 class CompanyDashboard extends Component {
   state = {
-    screen: "student",
+    screen: "student"
   };
 
   handleScreen = event => {
@@ -54,78 +52,80 @@ class CompanyDashboard extends Component {
 
     return (
       <React.Fragment>
-      <Responsive>
-        <Visibility
-          once={false}
-          onBottomPassed={this.showFixedMenu}
-          onBottomPassedReverse={this.hideFixedMenu}
-        >
-          <Segment
-            inverted
-            textAlign="center"
-            style={{ minHeight: 250, padding: "1em 0em" }}
-            vertical
+        <Responsive>
+          <Visibility
+            once={false}
+            onBottomPassed={this.showFixedMenu}
+            onBottomPassedReverse={this.hideFixedMenu}
           >
-            <Menu
-              fixed={fixed ? "top" : null}
-              inverted={!fixed}
-              pointing={!fixed}
-              secondary={!fixed}
-              size="large"
+            <Segment
+              inverted
+              textAlign="center"
+              style={{ minHeight: 250, padding: "1em 0em" }}
+              vertical
             >
-              <Container>
-                <Button
-                  as="a"
-                  inverted={!fixed}
-                  primary={fixed}
-                  style={{ marginLeft: "0.7em" }}
-                  name="student"
-                  onClick={this.handleScreen}
-                >
-                  View Students
-                </Button>
-
-                <Button
-                  as="a"
-                  inverted={!fixed}
-                  primary={fixed}
-                  style={{ marginLeft: "0.7em" }}
-                  name="job"
-                  onClick={this.handleScreen}
-                >
-                  Post Jobs
-                </Button>
-                <Menu.Item position="right">
+              <Menu
+                fixed={fixed ? "top" : null}
+                inverted={!fixed}
+                pointing={!fixed}
+                secondary={!fixed}
+                size="large"
+              >
+                <Container>
                   <Button
                     as="a"
                     inverted={!fixed}
                     primary={fixed}
-                    style={{ marginLeft: "0.5em" }}
-                    onClick={this.props.companySignout}
+                    style={{ marginLeft: "0.7em" }}
+                    name="student"
+                    onClick={this.handleScreen}
                   >
-                    Sign Out
+                    View Students
                   </Button>
-                </Menu.Item>
-              </Container>
-            </Menu>
-            <HomepageHeading />
-          </Segment>
-          <br />
-          {this.state.screen === "student" ? <StudentTable /> : <PostJob />}
-        </Visibility>
 
-      </Responsive>
+                  <Button
+                    as="a"
+                    inverted={!fixed}
+                    primary={fixed}
+                    style={{ marginLeft: "0.7em" }}
+                    name="job"
+                    onClick={this.handleScreen}
+                  >
+                    Post Jobs
+                  </Button>
+                  <Menu.Item position="right">
+                    <Button
+                      as="a"
+                      inverted={!fixed}
+                      primary={fixed}
+                      style={{ marginLeft: "0.5em" }}
+                      onClick={this.props.companySignout}
+                    >
+                      Sign Out
+                    </Button>
+                  </Menu.Item>
+                </Container>
+              </Menu>
+              <HomepageHeading />
+            </Segment>
+            <br />
+            {this.state.screen === "student" ? <StudentTable /> : <PostJob />}
+          </Visibility>
+        </Responsive>
       </React.Fragment>
     );
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
     companySignout: () => {
-      dispatch(companySignout())
+      dispatch(companySignout());
     }
-  }
-}
+  };
+};
 
-export default connect(null, mapDispatchToProps)(CompanyDashboard);
+export default connect(
+  null,
+  mapDispatchToProps
+)(CompanyDashboard);
