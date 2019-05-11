@@ -24,7 +24,13 @@ export const companyLoginReducer = (state = intialState, action) => {
         companyUser: null
       };
     case "COMPANY_SIGNOUT":
-      return state
+      return {
+        ...state,
+        isError: false,
+        isSuccess: false,
+        errorMessage: "",
+        companyUser: null
+      };
 
     default:
       return state;
