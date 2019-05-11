@@ -120,7 +120,6 @@ class StudentDashboard extends Component {
   }
 }
 
-
 const mapDispatchToProps = dispatch => {
   return {
     studentSignout: () => {
@@ -129,6 +128,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-
-export default connect(null, mapDispatchToProps)(StudentDashboard)
-
+export default connect(
+  null,
+  mapDispatchToProps
+)(StudentDashboard);
