@@ -23,6 +23,8 @@ export const loginReducer = (state = initialState, action) => {
         currentUser: action.payload.currentUser,
         errorMessage: ""
       };
+      case "STUDENT_SIGNOUT":
+      return state
     default:
       return state;
   }

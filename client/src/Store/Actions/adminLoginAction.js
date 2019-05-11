@@ -17,3 +17,10 @@ export const adminLoginError = error => {
     }
   };
 };
+
+export const adminSignout = () => {
+  return {
+    type: actionTypes.ADMIN_SIGNOUT
+  }
+}
+

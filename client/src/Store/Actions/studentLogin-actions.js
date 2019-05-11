@@ -17,3 +17,9 @@ export const loginSuccess = currentUser => {
     }
   };
 };
+
+export const userSignout = () => {
+  return {
+    type: actionTypes.STUDENT_SIGNOUT
+  };
+};

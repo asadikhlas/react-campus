@@ -17,3 +17,9 @@ export const companyLoginError = error => {
     }
   };
 };
+
+export const companySignout = () => {
+  return {
+    type: actionTypes.COMPANY_SIGNOUT
+  };
+};

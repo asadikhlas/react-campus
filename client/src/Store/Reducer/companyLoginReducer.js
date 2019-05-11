@@ -23,6 +23,9 @@ export const companyLoginReducer = (state = intialState, action) => {
         errorMessage: action.payload.error,
         companyUser: null
       };
+    case "COMPANY_SIGNOUT":
+      return state
+
     default:
       return state;
   }
